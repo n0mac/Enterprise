@@ -25,7 +25,17 @@ class LoginPage(BasePage):
 
     search_text_elements = SearchTextElement()
 
-    def click_login_button_loginpage(self):
+    def input_valid_username(self):
+        input_username = self.driver.find_element(*SecondPageLocators.INPUT_USERNAME_FIELD)
+        input_username.send_keys("ruslana.wilson+1@gmail.com")
+
+    def input_valid_password(self):
+        input_username = self.driver.find_element(*SecondPageLocators.INPUT_PASSWORD_FIELD)
+        input_username.send_keys("qweqwe123")
+
+    def click_to_login(self):
         login_button = self.driver.find_element(*SecondPageLocators.LOGIN_BUTTON_ACTION)
         login_button.click()
         return "HAVE AN ACCOUNT? LOGIN HERE" not in self.driver.page_source
+
+
