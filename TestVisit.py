@@ -29,8 +29,6 @@ class Home(unittest.TestCase):
         time.sleep(1)
         submit_plan = page.MainPage(self.driver)
         submit_plan.click_find()
-
-    def test_pricing_page(self):
         buy_this_plan = page.PricingPage(self.driver)
         buy_this_plan.click_buy_plan()
 
@@ -48,8 +46,8 @@ class Home(unittest.TestCase):
 
         #login_page = page.LoginPage(self.driver)
 
-    #def tearDown(self):
-        #self.driver.close()
+    def tearDown(self):
+        self.driver.close()
 
 if __name__ == "__main__":
     unittest.main()
