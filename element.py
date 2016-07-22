@@ -14,4 +14,3 @@ class BasePageElement(object):
             lambda driver: driver.find_element_by_xpath(self.locator))
         element =  driver.find_element_by_xpath(self.locator)
         return element.get_attribute("value")
-    

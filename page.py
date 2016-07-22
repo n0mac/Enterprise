@@ -1,5 +1,5 @@
 from element import BasePageElement
-from locators import MainPageLocators, SecondPageLocators, PricingPageLocators
+from locators import *
 
 class SearchTextElement(BasePageElement):
 
@@ -59,6 +59,25 @@ class PricingPage(BasePage):
     def click_buy_plan(self):
         click_buy_plan = self.driver.find_element(*PricingPageLocators.BUY_STUDIO_PLAN)
         click_buy_plan.click()
+
+class EmailRegistrationPage(BasePage):
+
+    def click_new_member(self):
+        click_tab_new = self.driver.find_element(*RegisterNewEmailLocators.NEW_MEMBER_TAB)
+        click_tab_new.click()
+
+    def input_email_new(self):
+        input_new_email = self.driver.find_element(*RegisterNewEmailLocators.EMAIL_FIELD_NEW)
+        input_new_email.send_keys("michael.boatman+322@gmail.com")
+
+    def click_password_field(self):
+        input_new_password = self.driver.find_element(*RegisterNewEmailLocators.PASSWORD_FIELD_NEW)
+        input_new_password.send_keys("qweqwe123")
+
+    def click_confirm_password_field(self):
+        click_confirm_password_field = self.driver.find_element(*RegisterNewEmailLocators.CONFIRM_PASSWORD_FIELD_NEW)
+        click_confirm_password_field.send_keys("qweqwe123")
+
 
 class LoginPage(BasePage):
 

@@ -20,4 +20,10 @@ class SecondPageLocators(object):
 class PricingPageLocators(object):
     BUY_STUDIO_PLAN = (By.XPATH, ".//*[@id='select_workout_plan']/li/div/a")
 
+class RegisterNewEmailLocators(object):
+    NEW_MEMBER_TAB = (By.XPATH, ".//*[@id='new_member']/a")
+    EMAIL_FIELD_NEW = (By.XPATH, ".//*[@id='user_email']")
+    PASSWORD_FIELD_NEW = (By.XPATH, ".//*[@id='user_password']")
+    CONFIRM_PASSWORD_FIELD_NEW = (By.XPATH, ".//*[@id='user_password_confirmation']")
+
 
