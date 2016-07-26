@@ -54,6 +54,14 @@ class MainPage(BasePage):
         submit_my_plan = self.driver.find_element(*MainPageLocators.SUBMIT_FIND_MY_PLAN)
         submit_my_plan.click()
 
+class AssertsTitles(BasePage):
+
+    def pricing_title_matches(self):
+        return self.driver.find_element(*AssertionIds.PRICING_PAGE_TITLE).text
+
+    def new_member_title(self):
+        return self.driver.find_element(*AssertionIds.NEW_REGISTRATION_TITLE).text
+
 class PricingPage(BasePage):
 
     def click_buy_plan(self):
@@ -77,6 +85,10 @@ class EmailRegistrationPage(BasePage):
     def click_confirm_password_field(self):
         click_confirm_password_field = self.driver.find_element(*RegisterNewEmailLocators.CONFIRM_PASSWORD_FIELD_NEW)
         click_confirm_password_field.send_keys("qweqwe123")
+
+    def click_next_button(self):
+        next_button_go = self.driver.find_element(*RegisterNewEmailLocators.NEXT_BUTTON)
+        next_button_go.click()
 
 
 class LoginPage(BasePage):

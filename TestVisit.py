@@ -30,14 +30,22 @@ class Home(unittest.TestCase):
         time.sleep(0.3)
         submit_plan = page.MainPage(self.driver)
         submit_plan.click_find()
+        #assert "Recommended 4-Week Programs Based On Your Input" in self.driver.page_source
+        asserts = page.AssertsTitles(self.driver)
+        assert asserts.pricing_title_matches(), "Title doesn't match"
         buy_this_plan = page.PricingPage(self.driver)
-        buy_this_plan.click_buy_plan()
+        buy_this_plan.click_buy_plan(), "Title doesn't match"
+        assert asserts.new_member_title()
         new_member = page.EmailRegistrationPage(self.driver)
         new_member.click_new_member()
+        new_member_email = page.EmailRegistrationPage(self.driver)
+        new_member_email.input_email_new()
         new_member_password = page.EmailRegistrationPage(self.driver)
         new_member_password.click_password_field()
         new_member_password_confirmation = page.EmailRegistrationPage(self.driver)
         new_member_password_confirmation.click_confirm_password_field()
+        finish_email_registration = page.EmailRegistrationPage(self.driver)
+        finish_email_registration.click_next_button()
 
 
         '''main_page = page.MainPage(self.driver)
@@ -53,8 +61,8 @@ class Home(unittest.TestCase):
 
         #login_page = page.LoginPage(self.driver)
 
-    '''def tearDown(self):
-        self.driver.close()'''
+    def tearDown(self):
+        self.driver.close()
 
 if __name__ == "__main__":
     unittest.main()
