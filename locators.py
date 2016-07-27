@@ -27,10 +27,30 @@ class RegisterNewEmailLocators(object):
     CONFIRM_PASSWORD_FIELD_NEW = (By.XPATH, ".//*[@id='new_user_password_confirm']")
     NEXT_BUTTON = (By.XPATH, ".//*[@id='new_user']/fieldset/input")
 
+class AditionalInfoLocators(object):
+    FIRST_NAME = (By.XPATH, ".//*[@id='user_first_name']")
+    LAST_NAME = (By.XPATH, ".//*[@id='user_last_name']")
+    BIRTHDATE = (By.XPATH, ".//*[@id='user_profile_attributes_birth_date']")
+    ADDRESS = (By.XPATH, ".//*[@id='user_address_attributes_address']")
+    CITY = (By.XPATH, ".//*[@id='user_address_attributes_city']")
+    STATE = (By.XPATH, ".//*[@id='user_address_attributes_state']")
+    COUNTRY = (By.XPATH, ".//*[@id='user_address_attributes_country']")
+    POSTAL_CODE = (By.XPATH, ".//*[@id='user_address_attributes_zip_code']")
+    MOBILE_PHONE = (By.XPATH, ".//*[@id='user_address_attributes_phone']")
+    LOCATION = (By.XPATH, ".//*[@id='user_preferred_location']")
+    GO_TO_BILLING = (By.NAME, "commit")
+
 class AssertionIds(object):
     HOMEPAGE_TITLE = (By.XPATH, "html/body/div[1]/div[3]/div[1]/div[2]")
     PRICING_PAGE_TITLE = (By.XPATH, "html/body/div[1]/div[3]/div[1]/div[2]/span")
-    NEW_REGISTRATION_TITLE = (By.XPATH, "kaka")
+    NEW_REGISTRATION_TITLE = "existing Barretastic members"
+    ALREADY_HAVE_PROGRAM_TITLE = "* You have already created an active program with this email address. Please login to view your program."
+    PASSWORDS_NOT_MATCH = "* doesn't match Password"
+    PASSWORDS_SHORT = "* is too short (minimum is 8 characters)"
+    INCLUDE_NUMBER_LETTER = "* must include at least one letter and one number."
+    ADDITIONAL_INFO_MATCH = "CREATE YOUR STUDIO ACCOUNT"
+
+
 
 
 
