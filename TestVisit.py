@@ -9,6 +9,7 @@ class Home(unittest.TestCase):
         self.driver = webdriver.Firefox()
         self.driver.get("http://barretastic.m3v.us/")
         self.driver.implicitly_wait(10)
+        self.driver.maximize_window()
 
         #self.wait = WebDriverWait(self.driver, 1)
 
@@ -18,6 +19,9 @@ class Home(unittest.TestCase):
         pricing_page = page.PricingPage(self.driver)
         email_registration_page = page.EmailRegistrationPage(self.driver)
         additional_information = page.AdditionalInfoPage(self.driver)
+        billing_page = page.BillingPage(self.driver)
+        login_page = page.LoginPage(self.driver)
+        dashboar_page = page.DashboardPage(self.driver)
         asserts = page.AssertsTitles(self.driver)
 
         #check that homepage is opened
@@ -32,10 +36,10 @@ class Home(unittest.TestCase):
         time.sleep(0.3)
         home_page.click_second_dropdown()
         home_page.pick_motivation()
-        time.sleep(0.3)
+        time.sleep(0.4)
         home_page.click_third_dropdown()
         home_page.pick_amount()
-        time.sleep(0.3)
+        time.sleep(0.4)
         home_page.click_find()
 
         #check that pricing page is opened
@@ -78,7 +82,7 @@ class Home(unittest.TestCase):
         #check if user is redirected to additional info page
         assert asserts.additional_info_page() in self.driver.page_source
 
-        #check additional info with valid information
+        #check additional info with valid information entered
         additional_information.input_first_name()
         additional_information.input_last_name()
         additional_information.input_birthdate()
@@ -91,24 +95,43 @@ class Home(unittest.TestCase):
         additional_information.select_location()
         additional_information.go_to_billing_page()
 
+        #check billing page with valid information entered
+            #1.BILLING ADDRESS
+        billing_page.click_same_as_registration()
+        billing_page.click_same_as_registration()
+        time.sleep(2)
+        billing_page.enter_firstname()
+        billing_page.enter_lastname()
+        billing_page.enter_address()
+        billing_page.enter_city()
+        billing_page.select_billing_state()
+        billing_page.enter_zip()
+            #2.CREDIT CARD
+        billing_page.enter_card_name()
+        billing_page.enter_card_number()
+        billing_page.enter_exp_month()
+        billing_page.enter_exp_year()
+            #billing_page.click_terms_checkbox()
+
+        #check that homepage is opened
+        assert home_page.is_home_title_matches(), "Title doesn't match"
+        billing_page.click_home_logo()
+
+        #check that homepage is opened and user is logged out
+        assert home_page.is_home_title_matches(), "Title doesn't match"
+        billing_page.click_logout()
+
+        #Confirm that after login dashboard page is opened
 
 
+        #login with existing user
+        home_page.click_login_button()
+        login_page.input_valid_username()
+        login_page.input_valid_password()
+        login_page.click_to_login()
 
-
-
-
-        '''main_page = page.MainPage(self.driver)
-        main_page.click_login_button()
-        user_name = page.LoginPage(self.driver)
-        user_name.input_valid_username()
-        pass_login = page.LoginPage(self.driver)
-        pass_login.input_valid_password()
-        login_page = page.LoginPage(self.driver)
-        login_page.click_to_login()'''
-        #assert main_page.is_title_matches(), "Login"
-        #main_page.seacrh_text_element = "BARRETASTIC360"
-
-        #login_page = page.LoginPage(self.driver)
+        #Confirm that after login dashboard page is opened
+        assert dashboar_page.is_dashboard_title_matches(), "Title doesn't match"
 
     #def tearDown(self):
         #self.driver.close()

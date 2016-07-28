@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 class MainPageLocators(object):
-    LOGIN_BUTTON = (By.XPATH, "html/body/div[2]/div[2]/div/a[2]")
+    LOGIN_BUTTON = (By.XPATH, "html/body/div[1]/div[2]/div/a[2]")
     FIND_MY_PLAN_JS = (By.XPATH, "html/body/div[1]/div[2]/div/a[1]")
     GOAL_DROPDOWN = (By.XPATH, ".//*[@id='nl-form']/fieldset/div[1]/a")
     GOAL = (By.XPATH, ".//*[@id='nl-form']/fieldset/div[1]/ul/li[4]")
@@ -12,7 +12,7 @@ class MainPageLocators(object):
     SUBMIT_FIND_MY_PLAN = (By.XPATH, ".//*[@id='nl-form']/fieldset/input")
 
 class SecondPageLocators(object):
-    LOGIN_BUTTON_ACTION = (By.XPATH, "html/body/div[2]/div[2]/div/div/form/fieldset/ul/input")
+    LOGIN_BUTTON_ACTION = (By.NAME, "commit")
     INPUT_USERNAME_FIELD = (By.XPATH, ".//*[@id='user_email']")
     INPUT_PASSWORD_FIELD = (By.XPATH, ".//*[@id='user_password']")
     #pass
@@ -39,6 +39,23 @@ class AditionalInfoLocators(object):
     MOBILE_PHONE = (By.XPATH, ".//*[@id='user_address_attributes_phone']")
     LOCATION = (By.XPATH, ".//*[@id='user_preferred_location']")
     GO_TO_BILLING = (By.NAME, "commit")
+
+class BillingPageLocators(object):
+    SAME_AS_REGISTRATION = (By.XPATH, ".//*[@id='new_billing_info']/fieldset[1]/ul/li[1]/label")
+    BILLING_FNAME = (By.XPATH, ".//*[@id='billing_info_first_name']")
+    BILLING_LNAME = (By.XPATH, ".//*[@id='billing_info_last_name']")
+    BILLING_ADDRESS = (By.XPATH, ".//*[@id='billing_info_address']")
+    BILLING_CITY = (By.XPATH, ".//*[@id='billing_info_city']")
+    BILLING_STATE = (By.XPATH, ".//*[@id='billing_info_state']")
+    BILLING_ZIP_CODE = (By.XPATH, ".//*[@id='billing_info_zip_code']")
+    NAME_ON_CARD = (By.XPATH, ".//*[@id='billing_info_billing_name']")
+    CARD_NUMBER = (By.XPATH, ".//*[@id='billing_info_card_number']")
+    EXPIRY_MONTH = (By.XPATH, ".//*[@id='billing_info_exp_month']")
+    EXPIRY_YEAR = (By.XPATH, ".//*[@id='billing_info_exp_year']")
+    TERMS = (By.XPATH, ".//*[@id='new_billing_info']/fieldset[2]/div/label")
+    PURCHASE = (By.CLASS_NAME, "agreements")
+    HOME_BUTTON = (By.XPATH, "html/body/div[1]/div[1]/a/img")
+    LOGOUT_BUTTON = (By.XPATH, "html/body/div[1]/div[2]/div/a[2]")
 
 class AssertionIds(object):
     HOMEPAGE_TITLE = (By.XPATH, "html/body/div[1]/div[3]/div[1]/div[2]")

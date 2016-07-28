@@ -21,8 +21,8 @@ class MainPage(BasePage):
         return "Barretastic360" in self.driver.title
 
     def click_login_button(self):
-        element = self.driver.find_element(*MainPageLocators.LOGIN_BUTTON)
-        element.click()
+        login = self.driver.find_element(*MainPageLocators.LOGIN_BUTTON)
+        login.click()
 
     def click_find_my_plan_header_button(self):
         click_js_plan = self.driver.find_element(*MainPageLocators.FIND_MY_PLAN_JS)
@@ -113,7 +113,7 @@ class EmailRegistrationPage(BasePage):
 
     def input_valid_email(self):
         valid_email = self.driver.find_element(*RegisterNewEmailLocators.EMAIL_FIELD_NEW)
-        valid_email.send_keys("michael.boatman+334@gmail.com")
+        valid_email.send_keys("michael.boatman+352@gmail.com")
 
     def input_not_match_password_confirm(self):
         input_not_matching_password = self.driver.find_element(*RegisterNewEmailLocators.CONFIRM_PASSWORD_FIELD_NEW)
@@ -139,7 +139,6 @@ class LoginPage(BasePage):
     def click_to_login(self):
         login_button = self.driver.find_element(*SecondPageLocators.LOGIN_BUTTON_ACTION)
         login_button.click()
-        return "HAVE AN ACCOUNT? LOGIN HERE" not in self.driver.page_source
 
 class AdditionalInfoPage(BasePage):
 
@@ -188,6 +187,76 @@ class AdditionalInfoPage(BasePage):
     def go_to_billing_page(self):
         click_next = self.driver.find_element(*AditionalInfoLocators.GO_TO_BILLING)
         click_next.click()
+
+class BillingPage(BasePage):
+
+    def click_same_as_registration(self):
+        click_checkbox = self.driver.find_element(*BillingPageLocators.SAME_AS_REGISTRATION)
+        click_checkbox.click()
+
+    def enter_firstname(self):
+        enter_fname = self.driver.find_element(*BillingPageLocators.BILLING_FNAME)
+        enter_fname.send_keys("iPhone")
+
+    def enter_lastname(self):
+        enter_lname = self.driver.find_element(*BillingPageLocators.BILLING_LNAME)
+        enter_lname.send_keys("Profi")
+
+    def enter_address(self):
+        enter_address = self.driver.find_element(*BillingPageLocators.BILLING_ADDRESS)
+        enter_address.send_keys("Hoholya 137, apt 24")
+
+    def enter_city(self):
+        enter_city = self.driver.find_element(*BillingPageLocators.BILLING_CITY)
+        enter_city.send_keys("New Cherkasy")
+
+    def select_billing_state(self):
+        enter_state = Select(self.driver.find_element(*BillingPageLocators.BILLING_STATE))
+        enter_state.select_by_value("CA")
+
+    def enter_zip(self):
+        enter_zip = self.driver.find_element(*BillingPageLocators.BILLING_ZIP_CODE)
+        enter_zip.send_keys("18FY00")
+
+    def enter_card_name(self):
+        enter_card_name = self.driver.find_element(*BillingPageLocators.NAME_ON_CARD)
+        enter_card_name.send_keys("Apostol the Great")
+
+    def enter_card_number(self):
+        enter_number = self.driver.find_element(*BillingPageLocators.CARD_NUMBER)
+        enter_number.send_keys("4242424242424242")
+
+    def enter_exp_month(self):
+        enter_month = self.driver.find_element(*BillingPageLocators.EXPIRY_MONTH)
+        enter_month.send_keys("10")
+
+    def enter_exp_year(self):
+        enter_year = self.driver.find_element(*BillingPageLocators.EXPIRY_YEAR)
+        enter_year.send_keys("2020")
+
+    def click_terms_checkbox(self):
+        click_checkbox = self.driver.find_element(*BillingPageLocators.TERMS)
+        click_checkbox.click()
+
+    def click_purchase(self):
+        purchase = self.driver.find_element(*BillingPageLocators.PURCHASE)
+        purchase.click()
+
+    def click_home_logo(self):
+        logo = self.driver.find_element(*BillingPageLocators.HOME_BUTTON)
+        logo.click()
+
+    def click_logout(self):
+        logout = self.driver.find_element(*BillingPageLocators.LOGOUT_BUTTON)
+        logout.click()
+
+class DashboardPage(BasePage):
+
+    def is_dashboard_title_matches(self):
+        return "Barretastic360 | Dashboard" in self.driver.title
+
+
+
 
 
 
