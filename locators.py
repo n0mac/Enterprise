@@ -57,6 +57,14 @@ class BillingPageLocators(object):
     HOME_BUTTON = (By.XPATH, "html/body/div[1]/div[1]/a/img")
     LOGOUT_BUTTON = (By.XPATH, "html/body/div[1]/div[2]/div/a[2]")
 
+class DashboardPageLocators(object):
+    CHANGE_WORKOUT_BUTTON = (By.XPATH, "html/body/div[1]/div[4]/section[2]/div[1]/div[3]/a[2]")
+    CHANGE_WORKOUT_BUTTON_IF_RECOVERY = (By.XPATH, "html/body/div[1]/div[4]/section[2]/div[1]/div[3]/a")
+    ODW_CONTINUE_BUTTON = (By.XPATH, "html/body/div[1]/div[4]/section/div/div[2]/a")
+    LIVE_CONTINUE_BUTTON = (By.XPATH, "html/body/div[1]/div[4]/section/div/div[1]/a")
+    RECOVERY_CONTINUE_BUTTON = (By.XPATH, "html/body/div[1]/div[4]/section/div/div[3]/a")
+    SKIP_THIS_STEP_BUTTON = (By.XPATH, "html/body/div[1]/div[4]/section/a")
+
 class AssertionIds(object):
     HOMEPAGE_TITLE = (By.XPATH, "html/body/div[1]/div[3]/div[1]/div[2]")
     PRICING_PAGE_TITLE = (By.XPATH, "html/body/div[1]/div[3]/div[1]/div[2]/span")
@@ -66,6 +74,13 @@ class AssertionIds(object):
     PASSWORDS_SHORT = "* is too short (minimum is 8 characters)"
     INCLUDE_NUMBER_LETTER = "* must include at least one letter and one number."
     ADDITIONAL_INFO_MATCH = "CREATE YOUR STUDIO ACCOUNT"
+    ALREADY_CREATED_MINDBODY_ACC = "An account has already been created in MINDBODY with that email address. Please register as an existing user."
+    CHOOSE_A_NEW_WORKOUT_TITLE = "CHOOSE A NEW WORKOUT"
+    ON_DEMAND_WORKOUT_TITLE_ON_DASHBOARD = "On Demand Workout"
+    RECOVERY_TITLE_ON_DASHBOARD = "Recovery day"
+    LIVE_CLASS_TITLE_ON_DASHBOARD = "Class at Barretastic"
+
+
 
 
 

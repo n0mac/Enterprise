@@ -2,16 +2,36 @@ import unittest
 from selenium import webdriver
 import page
 import time
+import pymssql
+from selenium.common.exceptions import NoSuchElementException
 
 class Home(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.get("http://barretastic.m3v.us/")
-        self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(2)
         self.driver.maximize_window()
+        #self.conn=pymssql.connect(host='dev05.m3v.us',user='booya',password='',database='postgres')
 
         #self.wait = WebDriverWait(self.driver, 1)
+
+    '''def test_verify(self):
+        conn = self.conn
+        cursor = conn.cursor(as_dict=True)
+        cursor.execute('select * from users where id = 2')
+        records=cursor.fetchall()
+        cursor.close()
+        print records
+        department_names=[]
+        for record in records:
+            department_name=record.get('Name')
+            department_names.append(department_name)
+            print department_name
+        print "total records=%d" % len(department_names)
+        self.assertTrue(department_names.index('PAPA') !=-1)'''
+
+
 
     def test_login_functionality(self):
         #components
@@ -21,14 +41,14 @@ class Home(unittest.TestCase):
         additional_information = page.AdditionalInfoPage(self.driver)
         billing_page = page.BillingPage(self.driver)
         login_page = page.LoginPage(self.driver)
-        dashboar_page = page.DashboardPage(self.driver)
+        dashboard_page = page.DashboardPage(self.driver)
         asserts = page.AssertsTitles(self.driver)
 
         #check that homepage is opened
         assert home_page.is_home_title_matches(), "Title doesn't match"
 
         #check that find my plan button in the header is scrolling to the Mad Lib section
-        home_page.click_find_my_plan_header_button()
+        '''home_page.click_find_my_plan_header_button()
 
         #check pickers in Mad Lib section, pick some values
         home_page.click_first_dropdown()
@@ -74,7 +94,19 @@ class Home(unittest.TestCase):
         assert asserts.password_is_short() in self.driver.page_source
         assert asserts.must_include_letter_number() in self.driver.page_source
 
+        #check already registered user with program
+        email_registration_page.remove_invalid_email()
+        email_registration_page.input_registered_username()
+        email_registration_page.click_password_field()
+        email_registration_page.click_confirm_password_field()
+        email_registration_page.click_next_button()
+
+        #check that error message is displayed on existing member tab
+        assert asserts.check_mindbody_user_error() in self.driver.page_source
+
         #check valid credentials for email registration page
+        email_registration_page.click_new_member()
+        email_registration_page.input_valid_email()
         email_registration_page.click_password_field()
         email_registration_page.click_confirm_password_field()
         email_registration_page.click_next_button()
@@ -113,7 +145,7 @@ class Home(unittest.TestCase):
         billing_page.enter_exp_year()
             #billing_page.click_terms_checkbox()
 
-        #check that homepage is opened
+        #check that user is redirected to homepage
         assert home_page.is_home_title_matches(), "Title doesn't match"
         billing_page.click_home_logo()
 
@@ -121,7 +153,7 @@ class Home(unittest.TestCase):
         assert home_page.is_home_title_matches(), "Title doesn't match"
         billing_page.click_logout()
 
-        #Confirm that after login dashboard page is opened
+        #Confirm that after login dashboard page is opened'''
 
 
         #login with existing user
@@ -131,7 +163,62 @@ class Home(unittest.TestCase):
         login_page.click_to_login()
 
         #Confirm that after login dashboard page is opened
-        assert dashboar_page.is_dashboard_title_matches(), "Title doesn't match"
+        assert dashboard_page.is_dashboard_title_matches(), "Title doesn't match"
+
+        #click change workout for today from dashboard to open choose new workout page
+        dashboard_page.click_change_workout()
+
+        #Confirm that CHOOSE A NEW WORKOUT page is opened
+        assert asserts.choose_a_new_workout_page() in self.driver.page_source
+
+        #Change workout to on demand workout
+        dashboard_page.click_odw_continue()
+
+        #Confirm that workout was changed to on demand workout and dashboard page is opened
+        assert dashboard_page.is_dashboard_title_matches(), "Title doesn't match"
+        assert asserts.odw_title_is_appeared() in self.driver.page_source
+
+        #click change workout for today again from dashboard to open choose new workout page
+        dashboard_page.click_change_workout()
+
+        #Confirm that CHOOSE A NEW WORKOUT page is opened
+        assert asserts.choose_a_new_workout_page() in self.driver.page_source
+
+        #Change workout to Recovery Day
+        dashboard_page.click_recovery_continue()
+
+        #Confirm that workout was changed to recovery and dashboard page is opened
+        assert dashboard_page.is_dashboard_title_matches(), "Title doesn't match"
+        assert asserts.recovery_title_is_appeared() in self.driver.page_source
+
+        #click change workout for today again from dashboard to open choose new workout page
+        dashboard_page.click_change_workout()
+
+        #Confirm that CHOOSE A NEW WORKOUT page is opened
+        assert asserts.choose_a_new_workout_page() in self.driver.page_source
+
+        #Change workout to Live Class
+        dashboard_page.click_live_class_continue()
+
+        #Confirm that workout was changed to recovery and dashboard page is opened
+        assert dashboard_page.is_dashboard_title_matches(), "Title doesn't match"
+        assert asserts.live_class_title_is_appeared() in self.driver.page_source
+
+        #click change workout for today again from dashboard to open choose new workout page
+        dashboard_page.click_change_workout()
+
+        #Confirm that CHOOSE A NEW WORKOUT page is opened
+        assert asserts.choose_a_new_workout_page() in self.driver.page_source
+
+        #Check skip this step functionality on CHOOSE A NEW WORKOUT page
+        dashboard_page.click_skip_thi_step()
+
+        #Confirm that workout was changed to recovery and dashboard page is opened
+        assert dashboard_page.is_dashboard_title_matches(), "Title doesn't match"
+
+        #Class booking through dashboard
+
+
 
     #def tearDown(self):
         #self.driver.close()

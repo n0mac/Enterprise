@@ -1,3 +1,4 @@
+from selenium.common.exceptions import NoSuchElementException
 from element import BasePageElement
 from locators import *
 from selenium.webdriver.support.ui import Select
@@ -11,6 +12,7 @@ class BasePage(object):
 
     def __init__(self, driver):
         self.driver = driver
+        self.exeption = NoSuchElementException
 
 
 class MainPage(BasePage):
@@ -76,6 +78,21 @@ class AssertsTitles(BasePage):
     def additional_info_page(self):
         return AssertionIds.ADDITIONAL_INFO_MATCH
 
+    def check_mindbody_user_error(self):
+        return AssertionIds.ALREADY_CREATED_MINDBODY_ACC
+
+    def choose_a_new_workout_page(self):
+        return AssertionIds.CHOOSE_A_NEW_WORKOUT_TITLE
+
+    def odw_title_is_appeared(self):
+        return AssertionIds.ON_DEMAND_WORKOUT_TITLE_ON_DASHBOARD
+
+    def recovery_title_is_appeared(self):
+        return AssertionIds.RECOVERY_TITLE_ON_DASHBOARD
+
+    def live_class_title_is_appeared(self):
+        return AssertionIds.LIVE_CLASS_TITLE_ON_DASHBOARD
+
 class PricingPage(BasePage):
 
     def click_buy_plan(self):
@@ -95,6 +112,10 @@ class EmailRegistrationPage(BasePage):
         input_new_email = self.driver.find_element(*RegisterNewEmailLocators.EMAIL_FIELD_NEW)
         input_new_email.send_keys("michael.boatman+322@gmail.com")
 
+    def input_registered_username(self):
+        input_username = self.driver.find_element(*RegisterNewEmailLocators.EMAIL_FIELD_NEW)
+        input_username.send_keys("ruslana.wilson+1@gmail.com")
+
     def click_password_field(self):
         input_new_password = self.driver.find_element(*RegisterNewEmailLocators.PASSWORD_FIELD_NEW)
         input_new_password.send_keys("qweqwe123")
@@ -113,7 +134,7 @@ class EmailRegistrationPage(BasePage):
 
     def input_valid_email(self):
         valid_email = self.driver.find_element(*RegisterNewEmailLocators.EMAIL_FIELD_NEW)
-        valid_email.send_keys("michael.boatman+352@gmail.com")
+        valid_email.send_keys("michael.boatman+379@gmail.com")
 
     def input_not_match_password_confirm(self):
         input_not_matching_password = self.driver.find_element(*RegisterNewEmailLocators.CONFIRM_PASSWORD_FIELD_NEW)
@@ -130,7 +151,7 @@ class LoginPage(BasePage):
 
     def input_valid_username(self):
         input_username = self.driver.find_element(*SecondPageLocators.INPUT_USERNAME_FIELD)
-        input_username.send_keys("ruslana.wilson+1@gmail.com")
+        input_username.send_keys("ruslana.wilson+2@gmail.com")
 
     def input_valid_password(self):
         input_username = self.driver.find_element(*SecondPageLocators.INPUT_PASSWORD_FIELD)
@@ -254,6 +275,39 @@ class DashboardPage(BasePage):
 
     def is_dashboard_title_matches(self):
         return "Barretastic360 | Dashboard" in self.driver.title
+
+    def click_change_workout_if_recovery(self):
+        chage_workout = self.driver.find_element(*DashboardPageLocators.CHANGE_WORKOUT_BUTTON_IF_RECOVERY)
+        chage_workout.click()
+
+    def click_odw_continue(self):
+        odw_continue = self.driver.find_element(*DashboardPageLocators.ODW_CONTINUE_BUTTON)
+        odw_continue.click()
+
+    def click_recovery_continue(self):
+        recovery_continue = self.driver.find_element(*DashboardPageLocators.RECOVERY_CONTINUE_BUTTON)
+        recovery_continue.click()
+
+    def click_live_class_continue(self):
+        live_class_continue = self.driver.find_element(*DashboardPageLocators.LIVE_CONTINUE_BUTTON)
+        live_class_continue.click()
+
+    def click_change_workout(self):
+        elem = self.driver.find_element(*DashboardPageLocators.CHANGE_WORKOUT_BUTTON_IF_RECOVERY)
+        try:
+            elem2 = self.driver.find_element(*DashboardPageLocators.CHANGE_WORKOUT_BUTTON)
+            elem2.click()
+        except self.exeption:
+            elem.click()
+
+    def click_skip_thi_step(self):
+        skip_this_step = self.driver.find_element(*DashboardPageLocators.SKIP_THIS_STEP_BUTTON)
+        skip_this_step.click()
+
+
+
+
+
 
 
 
